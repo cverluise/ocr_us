@@ -51,4 +51,14 @@ cat upi_parsed.csv | xargs -n 1  ./upi-extract.sh >>upi_pubnum.txt
 tar -czvf src.tar.gz src/
 ```
 
+## Split
 
+```shell script
+split -b 8G src.tif.tar.gz "src.tif.tar.gz_"
+```
+
+## Unpack
+
+```shell script
+ls src.tif.tar.gz_ | xargs -n 1 tar -xzvf
+```
