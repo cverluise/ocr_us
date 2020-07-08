@@ -8,13 +8,13 @@ for file in $(cat ~/yellowbook.txt); do echo ${file} && curl -L -O https://bulkd
 
 ## Untar
 
-```bash
+```schell script
 for file in $(find *.tar); do echo ${file} && tar -xf ${file}; done
 ```
 
 ## Parse
 
-```bash
+```shell script
 find -O3 -L ./ -name "*.xml" >> upi_dir.txt
 cat upi_dir.txt | xargs -n 1 ./upi-parser.sh >> upi_parsed.csv
 ```
@@ -33,8 +33,22 @@ check that bib-page-1 is always the same as abstr-page-1. Nb: seems to be the ca
 
 ## OCR
 
-```bash
+```shell script
 tail --lines=+$(ls data | wc -l) upi_parsed.csv | parallel -j 2 ./upi-ocr.sh :::: -
 ```
 
 Nb: we limit the nb of jobs to 2. OCR is very greedy and takes up to 4 cores per job. 
+
+## extract
+
+```shell script
+cat upi_parsed.csv | xargs -n 1  ./upi-extract.sh >>upi_pubnum.txt
+```
+
+## Compress
+
+```shell script
+tar -czvf src.tar.gz src/
+```
+
+
