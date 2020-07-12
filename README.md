@@ -68,7 +68,7 @@ ls src.tif.tar.gz_ | xargs -n 1 tar -xzvf
 ```shell script
 ls src/ | cut -f 1 -d "."  >> src.txt  # list all patents
 ls data/ | cut -f 1 -d "."  >> data_$(date +"%y%m%d").txt  # list patents already processed
-comm -23 <(sort src.txt) <(sort data_200709.txt) >> unprocessed_$(date +"%y%m%d").txt  #  list patents not processed yet
+comm -23 <(sort src.txt) <(sort data_$(date +"%y%m%d").txt) >> unprocessed_$(date +"%y%m%d").txt  #  list patents not processed yet
 ```
 
 Nb: plugging the OCR to unprocessed_*.txt requires small changes
